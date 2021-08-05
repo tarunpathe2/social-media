@@ -23,17 +23,35 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Post> posts;
 	
+	@OneToMany(mappedBy = "user")
+	private Comments comments;
+	
+	
+	
+	public Comments getComments() {
+		return comments;
+	}
+
+	public void setComments(Comments comments) {
+		this.comments = comments;
+	}
+
 	public User() {
 		super();
 	}
 
-	public User(String name, String email, Date dateOfBirth, String address,long id) {
+	
+
+	public User(long id, String name, String email, Date dateOfBirth, String address, List<Post> posts,
+			Comments comments) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
-		this.id=id;
+		this.posts = posts;
+		this.comments = comments;
 	}
 
 	public String getName() {
@@ -94,6 +112,7 @@ public class User {
 				+ address + "]";
 	}
 
+	
 	
 	
 

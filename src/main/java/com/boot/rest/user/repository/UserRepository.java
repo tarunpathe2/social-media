@@ -8,4 +8,7 @@ import com.boot.rest.user.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+
+
+
 }
