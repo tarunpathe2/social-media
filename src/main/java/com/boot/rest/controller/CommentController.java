@@ -1,4 +1,4 @@
-package com.boot.rest.user.controller;
+package com.boot.rest.controller;
 
 import java.net.URI;
 import java.util.Date;
@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.boot.rest.user.Comments;
-import com.boot.rest.user.Post;
-import com.boot.rest.user.User;
-import com.boot.rest.user.repository.CommentRepository;
-import com.boot.rest.user.repository.PostRepository;
-import com.boot.rest.user.repository.UserRepository;
+import com.boot.rest.model.Comments;
+import com.boot.rest.model.Post;
+import com.boot.rest.model.User;
+import com.boot.rest.repository.CommentRepository;
+import com.boot.rest.repository.PostRepository;
+import com.boot.rest.repository.UserRepository;
 
+
+// Working on Comment Controller
 @RestController
 public class CommentController {
 	
@@ -51,7 +53,7 @@ public class CommentController {
 		User user = userOptional.get();
 		Post post = postOptional.get();
 		comments.setPost(post);
-		comments.setUser(user);
+		comments.setUsers(user);
 		Comments savedComment = commentRepo.save(comments);
 		return savedComment;
 		

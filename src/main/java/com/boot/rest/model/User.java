@@ -1,40 +1,47 @@
-package com.boot.rest.user;
+package com.boot.rest.model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.springframework.lang.NonNull;
 
 
 @Entity
+@Table(name = "user")
 public class User {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private long id;
+	@Column(name = "name",length = 30)
+	@NonNull
 	private String name;
+	@Column(name = "email",unique = true,nullable = false,length = 50)
+	@NonNull
 	private String email;
+	@Column(name = "dob",nullable = false)
+	@NonNull
 	private Date dateOfBirth;
+	@Column(name = "address",length = 30)
+	@NonNull
 	private String address;
-	@OneToMany(mappedBy = "user")
-	private List<Post> posts;
 	
-	@OneToMany(mappedBy = "user")
-	private Comments comments;
-	
-	
-	
-	public Comments getComments() {
-		return comments;
-	}
+	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+	private List<Post> posts = new ArrayList<>();
 
-	public void setComments(Comments comments) {
-		this.comments = comments;
-	}
+	
 
 	public User() {
 		super();
@@ -42,8 +49,7 @@ public class User {
 
 	
 
-	public User(long id, String name, String email, Date dateOfBirth, String address, List<Post> posts,
-			Comments comments) {
+	public User(long id, String name, String email, Date dateOfBirth, String address, List<Post> posts) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -51,9 +57,9 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 		this.posts = posts;
-		this.comments = comments;
 	}
 
+	
 	public String getName() {
 		return name;
 	}
