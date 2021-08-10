@@ -4,25 +4,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-
 import org.springframework.lang.NonNull;
 
 import com.boot.rest.model.Post;
 
 public class UserDto {
-	
-	
+
 	private long id;
 
+	@NonNull
 	private String name;
 
+	@NonNull
 	private String email;
-	
+
+	@NonNull
 	private Date dateOfBirth;
-	
+
+	@NonNull
 	private String address;
-	
+
 	private List<Post> posts = new ArrayList<>();
 
 	public long getId() {
@@ -72,28 +73,5 @@ public class UserDto {
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
 	}
-
-	public UserDto() {
-		super();
-	}
-
-	public UserDto(long id, String name, String email, Date dateOfBirth, String address, List<Post> posts) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.dateOfBirth = dateOfBirth;
-		this.address = address;
-		this.posts = posts;
-	}
-
-	@Override
-	public String toString() {
-		return "UserDto [id=" + id + ", name=" + name + ", email=" + email + ", dateOfBirth=" + dateOfBirth
-				+ ", address=" + address + ", posts=" + posts + "]";
-	}
-	
-	
-
 
 }

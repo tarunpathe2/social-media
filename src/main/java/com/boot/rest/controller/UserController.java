@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.boot.rest.dto.UserDto;
 import com.boot.rest.model.Post;
 import com.boot.rest.model.User;
 import com.boot.rest.repository.PostRepository;
 import com.boot.rest.repository.UserRepository;
-import com.boot.rest.response.Response;
 import com.boot.rest.service.UserService;
 
 
@@ -35,22 +35,22 @@ public class UserController {
 	private UserService service;
 	
 	@PostMapping("addProfile")
-	public Response<String> addUser(@RequestBody User user) {
-		return new Response<String>(HttpStatus.OK.value(),service.addUser(user),"User Added Succeessfully",null);
+	public UserDto addUser(@RequestBody UserDto userDto) {
+		return service.addUser(userDto);
 	}
 	
 	@GetMapping("getAllProfiles")
-	public Response<List<User>> getAllUsers() {
-		return new Response<List<User>>(HttpStatus.OK.value(),service.getAllUsers(),"get All Users",null);
+	public List<UserDto> getAllUsers() {
+		return service.getAllUsers();
 	}
 	
 	@GetMapping("getProfile/{email}")
-	public Response<String> getUser(@PathVariable String email) {
-		return new Response<String>(HttpStatus.OK.value(),service.getUser(email),"User",null);
+	public String getUser(@PathVariable String email) {
+		return service.getUser(email);
 	}
 	
 	@GetMapping("deleteProfile/{email}")
-	public Response<String> deleteUser(@PathVariable String email) {
-		return new Response<String>(HttpStatus.OK.value(),service.deleteUser(email),"delete User",null);
+	public String deleteUser(@PathVariable String email) {
+		return service.deleteUser(email);
 	} 
 }

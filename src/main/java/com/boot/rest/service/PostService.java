@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.boot.rest.exception.DataNotFoundException;
 import com.boot.rest.model.Post;
@@ -13,8 +14,7 @@ import com.boot.rest.model.User;
 import com.boot.rest.repository.PostRepository;
 import com.boot.rest.repository.UserRepository;
 
-
-
+@Service
 public class PostService {
 
 	@Autowired

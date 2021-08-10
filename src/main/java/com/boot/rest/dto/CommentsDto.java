@@ -8,16 +8,6 @@ public class CommentsDto {
 	private String message;  
 	private Post post;
 	
-	public CommentsDto(long id, String message, Post post) {
-		super();
-		this.id = id;
-		this.message = message;
-		this.post = post;
-	}
-	
-	public CommentsDto() {
-		super();
-	}
 
 	public long getId() {
 		return id;
@@ -43,11 +33,4 @@ public class CommentsDto {
 		this.post = post;
 	}
 
-	@Override
-	public String toString() {
-		return "CommentsDto [id=" + id + ", message=" + message + ", post=" + post + "]";
-	}
-	
-	
-	
 }
