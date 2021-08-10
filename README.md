@@ -1,2 +1,3 @@
 Since I'm refractoring the code, I am going to make Model classes for User,post,Comment and Tags. then I will be making dto's for the same model classes so that I can transfer the data into Service and Model. After conversion of model to dto's, I am going to make the repositories for each Model class so that I can through database where I can define several methods for accessing the data. I will also make the response which represents the response pattern. In the controller I will perform certain mapping operations and gives the path of service class.
+
 (Feedback Changes) Currently I have added the service layer for Post and User and design the controller for the same also I have design exceptions. and working on dto's and creating service for comments and Tags. 
