@@ -3,6 +3,7 @@ package com.boot.rest.dto;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.lang.NonNull;
 
@@ -26,7 +27,7 @@ public class PostDto {
 	
 	private Date updatedDate;
 	
-	private User user;
+	private Optional<User> user;
 	
 	private List<Comments> comments = new ArrayList<>();
 	
@@ -80,12 +81,12 @@ public class PostDto {
 		this.updatedDate = updatedDate;
 	}
 
-	public User getUser() {
+	public Optional<User> getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Optional<User> user2) {
+		this.user = user2;
 	}
 
 	public List<Comments> getComments() {

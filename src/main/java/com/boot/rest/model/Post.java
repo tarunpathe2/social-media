@@ -112,11 +112,6 @@ public class Post {
 	public Post() {
 		super();
 	}
-	@Override
-	public String toString() {
-		return "Post [Id=" + Id + ", postName=" + postName + ", details=" + details + ", like=" + like
-				+ ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + ", comments=" + comments + "]";
-	}
 	
 	
 	
