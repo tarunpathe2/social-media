@@ -5,9 +5,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boot.rest.dto.PostDto;
+import com.boot.rest.dto.UserDto;
 import com.boot.rest.exception.DataNotFoundException;
 import com.boot.rest.model.Post;
 import com.boot.rest.model.User;
@@ -18,6 +21,9 @@ import com.boot.rest.repository.UserRepository;
 public class PostService {
 
 	@Autowired
+	private ModelMapper modelMapper;
+	
+	@Autowired
 	UserRepository userRepository;
 
 	@Autowired
@@ -26,18 +32,14 @@ public class PostService {
 	private Date date = new Date(Calendar.getInstance().getTime().getTime());
 
 	
-	public Post addPost(Long id, Post post) {
-		if (userRepository.existsById(id)) {
-			Optional<User> op = userRepository.findById(id);
-			post.setUser(op.get());
-			post.setCreatedDate(date);
-			post.setUpdatedDate(date);
-			post.setLike(0L);
-			postRepo.save(post);
+	public PostDto addPost(UserDto userDto,long id) {
+
+		Post post = new Post();
+		Optional<User> user = userRepository.findByEmail(userDto.getEmail());
+		post.setUser(user);
 			return post;
-		} else {
+		
 			throw new DataNotFoundException("User Profile Not Found");
-		}
 
 	}
 
