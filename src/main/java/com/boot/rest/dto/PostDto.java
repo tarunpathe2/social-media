@@ -7,8 +7,6 @@ import java.util.Optional;
 
 import org.springframework.lang.NonNull;
 
-import com.boot.rest.model.Comments;
-import com.boot.rest.model.Tags;
 import com.boot.rest.model.User;
 
 public class PostDto {
@@ -29,10 +27,11 @@ public class PostDto {
 	
 	private Optional<User> user;
 	
-	private List<Comments> comments = new ArrayList<>();
-	
-	private List<Tags> tag = new ArrayList<>();
-
+	/*
+	 * private List<Comments> comments = new ArrayList<>();
+	 * 
+	 * private List<Tags> tag = new ArrayList<>();
+	 */
 	public long getId() {
 		return Id;
 	}
@@ -89,20 +88,15 @@ public class PostDto {
 		this.user = user2;
 	}
 
-	public List<Comments> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comments> comments) {
-		this.comments = comments;
-	}
-
-	public List<Tags> getTag() {
-		return tag;
-	}
-
-	public void setTag(List<Tags> tag) {
-		this.tag = tag;
-	}
+	/*
+	 * public List<Comments> getComments() { return comments; }
+	 * 
+	 * public void setComments(List<Comments> comments) { this.comments = comments;
+	 * }
+	 * 
+	 * public List<Tags> getTag() { return tag; }
+	 * 
+	 * public void setTag(List<Tags> tag) { this.tag = tag; }
+	 */
 
 }

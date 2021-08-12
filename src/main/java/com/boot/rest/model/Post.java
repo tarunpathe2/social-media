@@ -43,13 +43,17 @@ public class Post {
 	@JoinColumn(name = "user_id",nullable = false)
 	@JsonBackReference
 	private User user;
-	@OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
-	@JsonManagedReference
-	private List<Comments> comments = new ArrayList<>();
+	/*
+	 * @OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
+	 * 
+	 * @JsonManagedReference private List<Comments> comments = new ArrayList<>();
+	 */
 	
-	@OneToMany(mappedBy = "postModel",fetch = FetchType.LAZY)
-	@JsonManagedReference
-	private List<Tags> tag = new ArrayList<>();
+	/*
+	 * @OneToMany(mappedBy = "postModel",fetch = FetchType.LAZY)
+	 * 
+	 * @JsonManagedReference private List<Tags> tag = new ArrayList<>();
+	 */
 	
 	public long getId() {
 		return Id;
@@ -93,12 +97,11 @@ public class Post {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public List<Comments> getComments() {
-		return comments;
-	}
-	public void setComments(List<Comments> comments) {
-		this.comments = comments;
-	}
+
+	/*
+	 * public List<Comments> getComments() { return comments; } public void
+	 * setComments(List<Comments> comments) { this.comments = comments; }
+	 */
 	public Post(long id, String postName, String details, Long like, Date createdDate, Date updatedDate) {
 		super();
 		Id = id;
