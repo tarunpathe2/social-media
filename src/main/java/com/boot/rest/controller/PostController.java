@@ -36,36 +36,33 @@ public class PostController {
 
 	@PostMapping("user/{id}/post")
 	public Response<PostDto> addPost(@Validated @PathVariable Long id, @RequestBody PostDto post) {
-		return new Response<PostDto>(HttpStatus.OK.value(), postService.addPost(post, id), "Post Added Successfully",
-				null);
+		return new Response<PostDto>(HttpStatus.OK.value(), postService.addPost(post, id));
 	}
 
 	@GetMapping("user/{id}/getPosts")
 	public Response<List<PostDto>> getPost(@PathVariable Long id) {
-		return new Response<List<PostDto>>(HttpStatus.OK.value(), postService.getPosts(id), "List All Posts", null);
+		return new Response<List<PostDto>>(HttpStatus.OK.value(), postService.getPosts(id));
 	}
 
 	@PutMapping("user/{uId}/post/{pId}/update")
 	public Response<Post> updatePost(@Validated @PathVariable Long uId, @PathVariable Long pId,
 			@RequestBody Post model) {
-		return new Response<Post>(HttpStatus.OK.value(), postService.updateUserPost(uId, pId, model),
-				"Post Updated Successfully", null);
+		return new Response<Post>(HttpStatus.OK.value(), postService.updateUserPost(uId, pId, model));
 	}
 
 	@GetMapping("getAllPosts")
 	public Response<List<PostDto>> getAllPost() {
-		return new Response<List<PostDto>>(HttpStatus.OK.value(), postService.getAllPosts(), "List All Posts", null);
+		return new Response<List<PostDto>>(HttpStatus.OK.value(), postService.getAllPosts());
 	}
 
 	@PutMapping("post/{id}/like")
 	public Response<String> like(@PathVariable Long id) {
-		return new Response<String>(HttpStatus.OK.value(), postService.like(id), "Like your post", null);
+		return new Response<String>(HttpStatus.OK.value(), postService.like(id));
 	}
 
 	@DeleteMapping("user/{uId}/post/{pId}")
 	public Response<String> deletePost(@PathVariable Long uId, @PathVariable Long pId) {
-		return new Response<String>(HttpStatus.OK.value(), postService.deleteUserPost(uId, pId), "user post deleted",
-				null);
+		return new Response<String>(HttpStatus.OK.value(), postService.deleteUserPost(uId, pId));
 	}
 
 }

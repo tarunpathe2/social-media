@@ -25,8 +25,8 @@ import com.boot.rest.model.Post;
 import com.boot.rest.model.User;
 import com.boot.rest.repository.PostRepository;
 import com.boot.rest.repository.UserRepository;
+import com.boot.rest.service.serviceImpl.UserServiceImpl;
 import com.boot.rest.util.Response;
-import com.boot.rest.service.UserService;
 
 
 @RestController
@@ -34,25 +34,25 @@ import com.boot.rest.service.UserService;
 public class UserController {
 
 	@Autowired
-	private UserService service;
+	private UserServiceImpl service;
 	
 	@PostMapping("addUser")
 	public Response<String> addUser(@RequestBody UserDto userDto) {
-		return new Response<String>(HttpStatus.OK.value(),service.addUser(userDto),"User Added Succeessfully",null);
+		return new Response<String>(HttpStatus.OK.value(),"User Added Succeessfully");
 	}
 	
 	@GetMapping("getAllUsers")
 	public Response<List<UserDto>> getAllUsers() {
-		return new Response<List<UserDto>>(HttpStatus.OK.value(),service.getAllUsers(),"get All Users",null);
+		return new Response<List<UserDto>>(HttpStatus.OK.value(),service.getAllUsers());
 	}
 	
 	@GetMapping("getUser/{email}")
 	public Response<String> getUser(@PathVariable String email) {
-		return new Response<String>(HttpStatus.OK.value(),service.getUser(email),"User",null);
+		return new Response<String>(HttpStatus.OK.value(),service.getUser(email));
 	}
 	
 	@DeleteMapping("deleteUser/{email}")
 	public Response<String> deleteUser(@PathVariable String email) {
-		return new Response<String>(HttpStatus.OK.value(),service.deleteUser(email),"delete User",null);
+		return new Response<String>(HttpStatus.OK.value(),service.deleteUser(email));
 	} 
 }

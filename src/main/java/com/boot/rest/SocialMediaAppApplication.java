@@ -1,4 +1,4 @@
-package com.boot.rest.socialmediaapp;
+package com.boot.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
