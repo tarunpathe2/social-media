@@ -3,16 +3,16 @@ package com.boot.rest.dto;
 import com.boot.rest.model.Post;
 import com.boot.rest.model.User;
 
-public class CommentsDto {
+public class LikesDto {
 
 	private long id;
 	
-	private String message;  
-	
-	private User user;
+	private long totalLikes;
 	
 	private Post post;
 	
+	private User user;
+
 	public long getId() {
 		return id;
 	}
@@ -21,12 +21,12 @@ public class CommentsDto {
 		this.id = id;
 	}
 
-	public String getMessage() {
-		return message;
+	public long getTotalLikes() {
+		return totalLikes;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setTotalLikes(long totalLikes) {
+		this.totalLikes = totalLikes;
 	}
 
 	public Post getPost() {
@@ -44,5 +44,5 @@ public class CommentsDto {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
 }

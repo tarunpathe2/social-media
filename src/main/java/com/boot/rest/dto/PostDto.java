@@ -7,31 +7,31 @@ import java.util.Optional;
 
 import org.springframework.lang.NonNull;
 
+import com.boot.rest.model.Comments;
+import com.boot.rest.model.Likes;
+import com.boot.rest.model.Tags;
 import com.boot.rest.model.User;
 
 public class PostDto {
 
 	private long Id;
 
-	@NonNull
 	private String postName;
 	
-	@NonNull
 	private String details;
-	
-	private Long like;
 	
 	private Date createdDate;
 	
 	private Date updatedDate;
 	
-	private Optional<User> user;
+	private User user;
 	
-	/*
-	 * private List<Comments> comments = new ArrayList<>();
-	 * 
-	 * private List<Tags> tag = new ArrayList<>();
-	 */
+	private List<Comments> comments = new ArrayList<>();
+	
+	private List<Tags> tags = new ArrayList<>();
+	
+	private Likes likes;
+
 	public long getId() {
 		return Id;
 	}
@@ -56,14 +56,6 @@ public class PostDto {
 		this.details = details;
 	}
 
-	public Long getLike() {
-		return like;
-	}
-
-	public void setLike(Long like) {
-		this.like = like;
-	}
-
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -80,23 +72,37 @@ public class PostDto {
 		this.updatedDate = updatedDate;
 	}
 
-	public Optional<User> getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Optional<User> user2) {
-		this.user = user2;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	/*
-	 * public List<Comments> getComments() { return comments; }
-	 * 
-	 * public void setComments(List<Comments> comments) { this.comments = comments;
-	 * }
-	 * 
-	 * public List<Tags> getTag() { return tag; }
-	 * 
-	 * public void setTag(List<Tags> tag) { this.tag = tag; }
-	 */
+	public List<Comments> getComments() {
+		return comments;
+	}
 
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
+
+	public List<Tags> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tags> tags) {
+		this.tags = tags;
+	}
+
+	public Likes getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Likes likes) {
+		this.likes = likes;
+	}
+	
+	
 }

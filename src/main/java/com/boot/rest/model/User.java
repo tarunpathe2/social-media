@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,60 +13,75 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
-@Table(name = "user")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private long id;
-	@Column(name = "name",length = 30)
-	@NonNull
-	private String name;
-	@Column(name = "email",unique = true,nullable = false,length = 50)
-	@NonNull
+	
 	private String email;
-	@Column(name = "dob",nullable = false)
-	@NonNull
-	private Date dateOfBirth;
-	@Column(name = "address",length = 30)
-	@NonNull
-	private String address;
 	
-	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-	private List<Post> posts = new ArrayList<>();
-
+	@OneToOne(fetch = FetchType.LAZY,mappedBy = "user")
+	@JsonManagedReference
+	private UserProfile userProfile;
 	
-
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade =  CascadeType.ALL)
+	@JsonManagedReference
+	private List<Post> post = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@JsonManagedReference
+	private List<Comments> comments = new ArrayList<>();
+	
+	@OneToOne(mappedBy = "user",fetch = FetchType.LAZY)
+	@JsonManagedReference
+	private Likes likes;
+	
 	public User() {
 		super();
 	}
 
-	
-
-	public User(long id, String name, String email, Date dateOfBirth, String address, List<Post> posts) {
+	public User(long id, String email,UserProfile userProfile) {
 		super();
 		this.id = id;
-		this.name = name;
 		this.email = email;
-		this.dateOfBirth = dateOfBirth;
-		this.address = address;
-		this.posts = posts;
+		this.userProfile = userProfile;
+		
 	}
 
 	
-	public String getName() {
-		return name;
+
+	public List<Post> getPost() {
+		return post;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPost(List<Post> post) {
+		this.post = post;
+	}
+
+	public List<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -76,44 +92,20 @@ public class User {
 		this.email = email;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public UserProfile getUserProfile() {
+		return userProfile;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
 	}
 
-	public String getAddress() {
-		return address;
+	public Likes getLikes() {
+		return likes;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setLikes(Likes likes) {
+		this.likes = likes;
 	}
-	
-	
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	
-
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-
-	
-
-	
 
 }

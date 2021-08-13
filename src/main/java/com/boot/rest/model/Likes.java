@@ -1,42 +1,40 @@
 package com.boot.rest.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Tags {
+public class Likes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private String name;
+	private long totalLikes;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JsonBackReference
 	private Post post;
-
-	public Tags() {
+	
+	@OneToOne
+	@JsonBackReference
+	private User user;
+	
+	public Likes() {
 		super();
 	}
 
-	public Tags(long id, String name) {
+	public Likes(long id, long totalLikes) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.totalLikes = totalLikes;
 	}
 
 	public long getId() {
@@ -47,12 +45,12 @@ public class Tags {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public long getTotalLikes() {
+		return totalLikes;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTotalLikes(long totalLikes) {
+		this.totalLikes = totalLikes;
 	}
 
 	public Post getPost() {
@@ -61,6 +59,14 @@ public class Tags {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }
