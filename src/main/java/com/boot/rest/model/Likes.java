@@ -1,29 +1,36 @@
 package com.boot.rest.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Table(name = "likes")
 public class Likes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Column
 	private long totalLikes;
 	
 	@ManyToOne
+	@JoinColumn(name = "posts_id",nullable = false)
 	@JsonBackReference
 	private Post post;
 	
 	@OneToOne
+	@JoinColumn(name = "users_id",nullable = false)
 	@JsonBackReference
 	private User user;
 	

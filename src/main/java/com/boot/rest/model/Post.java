@@ -23,21 +23,27 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name = "posts")
 public class Post {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Column
 	private String postName;
 	
+	@Column
 	private String details;
 	
+	@Column
 	private Date createdDate;
 	
+	@Column
 	private Date updatedDate;
 	
 	@ManyToOne
+	@JoinColumn(name = "users_id", nullable = false)
 	@JsonBackReference
 	private User user;
 	
@@ -51,7 +57,7 @@ public class Post {
 	
 	@OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
 	@JsonManagedReference
-	private Likes likes;
+	private List<Likes> likes= new ArrayList<>();
 
 	public Post() {
 		super();
@@ -68,12 +74,12 @@ public class Post {
 	}
 	
 
-	public Likes getLikes() {
+	public List<Likes> getLikes() {
 		return likes;
 	}
 
 	public void setLikes(Likes likes) {
-		this.likes = likes;
+		this.likes = (List<Likes>) likes;
 	}
 
 	public User getUser() {

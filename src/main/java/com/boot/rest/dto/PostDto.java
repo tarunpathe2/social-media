@@ -24,13 +24,13 @@ public class PostDto {
 	
 	private Date updatedDate;
 	
-	private User user;
+	private Long userId;
 	
 	private List<Comments> comments = new ArrayList<>();
 	
 	private List<Tags> tags = new ArrayList<>();
 	
-	private Likes likes;
+	private List<Likes> likes= new ArrayList();;
 
 	public long getId() {
 		return Id;
@@ -72,12 +72,12 @@ public class PostDto {
 		this.updatedDate = updatedDate;
 	}
 
-	public User getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public List<Comments> getComments() {
@@ -96,11 +96,11 @@ public class PostDto {
 		this.tags = tags;
 	}
 
-	public Likes getLikes() {
+	public List<Likes> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(Likes likes) {
+	public void setLikes(List<Likes> likes) {
 		this.likes = likes;
 	}
 	

@@ -15,13 +15,13 @@ import com.boot.rest.dto.PostDto;
 import com.boot.rest.dto.UserDto;
 import com.boot.rest.exception.DataNotFoundException;
 import com.boot.rest.model.Post;
-import com.boot.rest.model.User;
+import com.boot.rest.model.Tags;
 import com.boot.rest.repository.PostRepository;
 import com.boot.rest.repository.UserRepository;
 import com.boot.rest.service.PostService;
 
 @Service
-public class PostServiceImpl implements PostService {
+public class PostServiceImpl implements PostService{
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -35,24 +35,37 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private UserServiceImpl userService;
 
+	private void postExist(Long id) {
+		if (!postRepo.existsById(id)) {
+			throw new DataNotFoundException("Post Not Found");
+		}
+	}
+
+	private void userExist(Long id) {
+		if (!userRepository.existsById(id)) {
+			throw new DataNotFoundException("User Not Found");
+		}
+	}
+
 	private Date date = new Date(Calendar.getInstance().getTime().getTime());
 
-	@Override
-	public PostDto addPost(PostDto postDto, long id) {
+	public PostDto addPost(PostDto postDto) {
 
-		if (userRepository.existsById(id)) {
-			Optional<User> user = userRepository.findById(id);
-			postDto.setUser(user);
-			postDto.setCreatedDate(date);
-			postDto.setLike(0L);
-			postDto.setUpdatedDate(date);
-			Post post = modelMapper.map(postDto, Post.class);
-			Post savedPost = postRepo.save(post);
-			PostDto savedPostDto = modelMapper.map(savedPost, PostDto.class);
-			return postDto;
-		} else {
-			throw new DataNotFoundException("User Profile Not Found");
-		}
+		userExist(postDto.getId());
+		Post post = modelMapper.map(postDto, Post.class);
+		post.setUser(userRepository.findById(postDto.getId()).get());
+		post.setCreatedDate(date);
+		post.setUpdatedDate(date);
+		List<Tags> tags = new ArrayList<>();
+		postDto.getTags().stream().forEach(e -> {
+			Tags tag = new Tags();
+			tag.setName(e.getName());
+			tag.setPost(post);
+			tags.add(tag);
+		});
+		post.setTags(tags);
+		postRepo.save(post);
+		return modelMapper.map(post, PostDto.class);
 
 	}
 
@@ -64,65 +77,49 @@ public class PostServiceImpl implements PostService {
 
 		return postDto;
 	}
-
+	
 	@Override
-	public String like(Long id) {
-		if (postRepo.existsById(id)) {
-			Optional<Post> op = postRepo.findById(id);
-			op.get().setLike(op.get().getLike() + 1);
-			postRepo.save(op.get());
-			return "Thanks for Like";
-		} else {
-			throw new DataNotFoundException("PostNotFound");
-		}
+	public PostDto getPost(long id) {
+		postExist(id);
+		return modelMapper.map(postRepo.findById(id).get(), PostDto.class);
+	}
+	
+	@Override
+	public List<PostDto> getUserPosts(UserDto userDto) {
+		if (userRepository.existsByEmail(userDto.getEmail()))
+			throw new DataNotFoundException("User Not Found");
+		List<Post> post = postRepo.findByUser(userRepository.FindByEmail(userDto.getEmail()).get());
+		List<PostDto> postDto = post.stream().map(user -> modelMapper.map(user, PostDto.class))
+				.collect(Collectors.toList());
+
+		return postDto;
 	}
 
 	@Override
-	public List<PostDto> getPosts(long id) {
-		if (userRepository.existsById(id)) {
-			List<Post> postList = postRepo.findPostByUserOrderById(userRepository.findById(id));
-			List<PostDto> postDtoList = new ArrayList<>();
-			for (Post post : postList) {
-				postDtoList.add(modelMapper.map(post, PostDto.class));
-			}
-			return postDtoList;
-		} else {
-			throw new DataNotFoundException("user profile not found");
-		}
+	public PostDto updateUserPost(PostDto postDto) {
+		postExist(postDto.getId());
+		Optional<Post> optionalPost = postRepo.findById(postDto.getId());
+		Post post = optionalPost.get();
+		post.setUpdatedDate(date);
+		post.setPostName(postDto.getPostName());
+		post.setDetails(postDto.getDetails());
+		List<Tags> tags = new ArrayList<>();
+		postDto.getTags().stream().forEach(e -> {
+			Tags tag = new Tags();
+			tag.setName(e.getName());
+			tag.setPost(post);
+			tags.add(tag);
+		});
+		post.setTags(tags);
+		postRepo.save(post);
+		return modelMapper.map(post, PostDto.class);
+
 	}
 
 	@Override
-	public Post updateUserPost(Long uId, Long pId, Post model) {
-		if (userRepository.existsById(uId)) {
-			if (postRepo.existsById(pId)) {
-				Optional<Post> op = postRepo.findById(pId);
-				op.get().setUpdatedDate(date);
-				if (model.getPostName() != null)
-					op.get().setPostName(model.getPostName());
-				if (model.getDetails() != null)
-					op.get().setDetails(model.getDetails());
-				postRepo.save(op.get());
-				return op.get();
-			} else {
-				throw new DataNotFoundException("post not found");
-			}
-		} else {
-			throw new DataNotFoundException("user not found");
-		}
-	}
-
-	@Override
-	public String deleteUserPost(Long uId, Long pId) {
-		if (userRepository.existsById(uId)) {
-			if (postRepo.existsById(pId)) {
-				postRepo.deleteById(pId);
-				return "post deleted successfully";
-			} else {
-				throw new DataNotFoundException("post not found");
-			}
-		} else {
-			throw new DataNotFoundException("user not found");
-		}
+	public void deleteUserPost(Long id) {
+		postExist(id);
+		postRepo.deleteById(id);
 	}
 
 }

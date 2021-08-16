@@ -22,15 +22,18 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
+@Table(name = "users")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
 	private long id;
 	
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
-	@OneToOne(fetch = FetchType.LAZY,mappedBy = "user")
+	@OneToOne(fetch = FetchType.LAZY,mappedBy = "user",cascade =  CascadeType.ALL)
 	@JsonManagedReference
 	private UserProfile userProfile;
 	

@@ -6,9 +6,9 @@ import com.boot.rest.dto.UserDto;
 
 public interface UserService {
 	
-	public UserDto addUser(UserDto userDto);
+	public String addUser(UserDto userDto);
 	public List<UserDto> getAllUsers();
-	public String getUser(String email);
-	public String deleteUser(String email);
+	public UserDto getUser(String email);
+	public UserDto deleteUser(UserDto userDto);
 
 }

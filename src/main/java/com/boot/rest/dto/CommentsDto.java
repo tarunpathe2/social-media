@@ -1,5 +1,7 @@
 package com.boot.rest.dto;
 
+import org.springframework.lang.NonNull;
+
 import com.boot.rest.model.Post;
 import com.boot.rest.model.User;
 
@@ -9,9 +11,11 @@ public class CommentsDto {
 	
 	private String message;  
 	
-	private User user;
+	@NonNull
+	private Long userId;
 	
-	private Post post;
+	@NonNull
+	private Long postId;
 	
 	public long getId() {
 		return id;
@@ -29,20 +33,20 @@ public class CommentsDto {
 		this.message = message;
 	}
 
-	public Post getPost() {
-		return post;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public User getUser() {
-		return user;
+	public Long getPostId() {
+		return postId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setPostId(Long postId) {
+		this.postId = postId;
 	}
 
 }

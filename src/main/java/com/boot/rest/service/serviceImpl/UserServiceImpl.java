@@ -24,14 +24,19 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository repo;
 
+	private void isExist(String email) {
+		if (!repo.existsByEmail(email)) {
+			throw new DataNotFoundException("User does not exist");
+		}
+	}
+	
 	@Override
-	public UserDto addUser(UserDto userDto) {
-		Optional<User> userModel = repo.findByEmail(userDto.getEmail());
-		if (userModel.isPresent())
+	public String addUser(UserDto userDto) {
+		if (repo.FindByEmail(userDto.getEmail()).isPresent())
 			throw new UnprocessableEntity("Email already Exist");
-		User model = modelMapper.map(userDto, User.class);
-		repo.save(model);
-		return userDto;
+		User user = modelMapper.map(userDto, User.class);
+		repo.save(user);
+		return userDto.getEmail();
 	}
 
 	@Override
@@ -45,22 +50,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String getUser(String email) {
-		Optional<User> user = repo.findByEmail(email);
+	public UserDto getUser(String email) {
+		Optional<User> user = repo.FindByEmail(email);
 		UserDto userDto = null;
 		if (!user.isPresent())
 			throw new DataNotFoundException("Data Not found");
 
 		userDto = modelMapper.map(user.get(), UserDto.class);
-		return user.toString();
+		return userDto;
 	}
 
 	@Override
-	public String deleteUser(String email) {
-		Optional<User> user = repo.findByEmail(email);
-		if (!user.isPresent())
-			throw new DataNotFoundException("Data Not found");
-		else
-			return email;
+	public UserDto deleteUser(UserDto userDto) {
+		isExist(userDto.getEmail());
+		repo.delete(repo.FindByEmail(userDto.getEmail()).get());
+		return userDto;
+			
 	}
 }

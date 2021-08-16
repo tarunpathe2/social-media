@@ -47,12 +47,12 @@ public class UserController {
 	}
 	
 	@GetMapping("getUser/{email}")
-	public Response<String> getUser(@PathVariable String email) {
-		return new Response<String>(HttpStatus.OK.value(),service.getUser(email));
+	public Response<UserDto> getUser(@PathVariable String email) {
+		return new Response<UserDto>(HttpStatus.OK.value(),service.getUser(email));
 	}
 	
 	@DeleteMapping("deleteUser/{email}")
-	public Response<String> deleteUser(@PathVariable String email) {
-		return new Response<String>(HttpStatus.OK.value(),service.deleteUser(email));
+	public Response<UserDto> deleteUser(@PathVariable UserDto userDto) {
+		return new Response<UserDto>(HttpStatus.OK.value(),service.deleteUser(userDto));
 	} 
 }

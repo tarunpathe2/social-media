@@ -2,28 +2,36 @@ package com.boot.rest.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Table(name = "userProfiles")
 public class UserProfile {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Column
 	private String name;
 	
+	@Column
 	private Date dateOfBirth;
 	
+	@Column
 	private String address;
 	
 	@OneToOne
+	@JoinColumn(name = "users_id", nullable = false)
 	@JsonBackReference
 	private User user;
 

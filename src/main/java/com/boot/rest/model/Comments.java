@@ -7,11 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "comments")
 public class Comments {
 
 	@Id
@@ -21,10 +23,12 @@ public class Comments {
 	private String message;
 	
 	@ManyToOne
+	@JoinColumn(name = "users_id", nullable = false)
 	@JsonBackReference
 	private User user;
 	
 	@ManyToOne
+	@JoinColumn(name = "posts_id", nullable = false)
 	@JsonBackReference
 	private Post post;
 

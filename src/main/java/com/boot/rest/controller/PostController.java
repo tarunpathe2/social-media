@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,20 +33,19 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 
-	@PostMapping("user/{id}/post")
-	public Response<PostDto> addPost(@Validated @PathVariable Long id, @RequestBody PostDto post) {
-		return new Response<PostDto>(HttpStatus.OK.value(), postService.addPost(post, id));
+	@PostMapping("user/post")
+	public Response<PostDto> addPost(@RequestBody PostDto post) {
+		return new Response<PostDto>(HttpStatus.OK.value(), postService.addPost(post));
 	}
 
-	@GetMapping("user/{id}/getPosts")
-	public Response<List<PostDto>> getPost(@PathVariable Long id) {
-		return new Response<List<PostDto>>(HttpStatus.OK.value(), postService.getPosts(id));
+	@GetMapping("user/getPost/{id}")
+	public Response<PostDto> getPost(@PathVariable Long id) {
+		return new Response<PostDto>(HttpStatus.OK.value(), postService.getPost(id));
 	}
 
-	@PutMapping("user/{uId}/post/{pId}/update")
-	public Response<Post> updatePost(@Validated @PathVariable Long uId, @PathVariable Long pId,
-			@RequestBody Post model) {
-		return new Response<Post>(HttpStatus.OK.value(), postService.updateUserPost(uId, pId, model));
+	@PutMapping("user/post")
+	public Response<PostDto> updatePost(@RequestBody PostDto postDto) {
+		return new Response<PostDto>(HttpStatus.OK.value(), postService.updateUserPost(postDto));
 	}
 
 	@GetMapping("getAllPosts")
@@ -55,14 +53,9 @@ public class PostController {
 		return new Response<List<PostDto>>(HttpStatus.OK.value(), postService.getAllPosts());
 	}
 
-	@PutMapping("post/{id}/like")
-	public Response<String> like(@PathVariable Long id) {
-		return new Response<String>(HttpStatus.OK.value(), postService.like(id));
-	}
-
-	@DeleteMapping("user/{uId}/post/{pId}")
-	public Response<String> deletePost(@PathVariable Long uId, @PathVariable Long pId) {
-		return new Response<String>(HttpStatus.OK.value(), postService.deleteUserPost(uId, pId));
+	@DeleteMapping("user/post/{id}")
+	public Response<PostDto> deletePost(@PathVariable Long id) {
+		return new Response<PostDto>(HttpStatus.OK.value(), postService.deleteUserPost(id));
 	}
 
 }

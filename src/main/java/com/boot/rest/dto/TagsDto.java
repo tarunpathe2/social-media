@@ -1,5 +1,7 @@
 package com.boot.rest.dto;
 
+import org.springframework.lang.NonNull;
+
 import com.boot.rest.model.Post;
 
 public class TagsDto {
@@ -8,7 +10,8 @@ public class TagsDto {
 	
 	private String name;
 	
-	private Post post;
+	@NonNull
+	private Long postId;
 
 	public long getId() {
 		return id;
@@ -26,12 +29,12 @@ public class TagsDto {
 		this.name = name;
 	}
 
-	public Post getPost() {
-		return post;
+	public Long getPostId() {
+		return postId;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public void setPostId(Long postId) {
+		this.postId = postId;
 	}
 
 }

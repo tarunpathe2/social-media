@@ -12,20 +12,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name = "tags")
 public class Tags {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Column
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "posts_id",nullable = false)
 	@JsonBackReference
 	private Post post;
 

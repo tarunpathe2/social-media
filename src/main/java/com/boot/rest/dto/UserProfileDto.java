@@ -19,7 +19,8 @@ public class UserProfileDto {
 	
 	private String address;
 	
-	private User user;
+	@NonNull
+	private Long userId;
 
 	public long getId() {
 		return id;
@@ -53,12 +54,14 @@ public class UserProfileDto {
 		this.address = address;
 	}
 
-	public User getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}	
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	
 	
 }
