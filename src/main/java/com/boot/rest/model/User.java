@@ -34,7 +34,7 @@ public class User {
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
-	@OneToOne(fetch = FetchType.LAZY,mappedBy = "user",cascade =  CascadeType.ALL)
+	@OneToOne(cascade =  CascadeType.ALL)
 	@JsonIgnore
 	private UserProfile userProfile;
 	

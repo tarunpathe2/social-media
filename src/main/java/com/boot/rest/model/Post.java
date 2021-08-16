@@ -51,7 +51,7 @@ public class Post {
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
 	private List<Comments> comments = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "post")
+	@OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
 	private List<Tags> tags = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
