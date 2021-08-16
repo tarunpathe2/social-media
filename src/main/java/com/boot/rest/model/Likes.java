@@ -34,9 +34,11 @@ public class Likes {
 		super();
 	}
 
-	public Likes(long id, long totalLikes) {
+	public Likes(long id, Post post, User user) {
 		super();
 		this.id = id;
+		this.post = post;
+		this.user = user;
 	}
 
 	public long getId() {

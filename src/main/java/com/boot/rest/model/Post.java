@@ -42,6 +42,7 @@ public class Post {
 	@Column
 	private Date updatedDate;
 	
+	@Column
 	private long totalLikes;
 	
 	@ManyToOne
