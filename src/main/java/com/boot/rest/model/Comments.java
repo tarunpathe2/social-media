@@ -24,12 +24,10 @@ public class Comments {
 	
 	@ManyToOne
 	@JoinColumn(name = "users_id", nullable = false)
-	@JsonBackReference
 	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "posts_id", nullable = false)
-	@JsonBackReference
 	private Post post;
 
 	public Comments() {

@@ -29,23 +29,17 @@ public class UserProfile {
 	
 	@Column
 	private String address;
-	
-	@OneToOne
-	@JoinColumn(name = "users_id", nullable = false)
-	@JsonBackReference
-	private User user;
 
 	public UserProfile() {
 		super();
 	}
 
-	public UserProfile(long id, String name, Date dateOfBirth, String address,User user) {
+	public UserProfile(long id, String name, Date dateOfBirth, String addressr) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
-		this.user = user;
 	}
 
 	public long getId() {
@@ -79,15 +73,5 @@ public class UserProfile {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	
 	
 }

@@ -30,7 +30,6 @@ public class Tags {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "posts_id",nullable = false)
-	@JsonBackReference
 	private Post post;
 
 	public Tags() {

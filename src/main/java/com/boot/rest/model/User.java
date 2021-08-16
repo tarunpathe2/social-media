@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -34,20 +35,12 @@ public class User {
 	private String email;
 	
 	@OneToOne(fetch = FetchType.LAZY,mappedBy = "user",cascade =  CascadeType.ALL)
-	@JsonManagedReference
+	@JsonIgnore
 	private UserProfile userProfile;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade =  CascadeType.ALL)
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Post> post = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	@JsonManagedReference
-	private List<Comments> comments = new ArrayList<>();
-	
-	@OneToOne(mappedBy = "user",fetch = FetchType.LAZY)
-	@JsonManagedReference
-	private Likes likes;
 	
 	public User() {
 		super();
@@ -61,22 +54,12 @@ public class User {
 		
 	}
 
-	
-
 	public List<Post> getPost() {
 		return post;
 	}
 
 	public void setPost(List<Post> post) {
 		this.post = post;
-	}
-
-	public List<Comments> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comments> comments) {
-		this.comments = comments;
 	}
 
 	public long getId() {
@@ -101,14 +84,6 @@ public class User {
 
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = userProfile;
-	}
-
-	public Likes getLikes() {
-		return likes;
-	}
-
-	public void setLikes(Likes likes) {
-		this.likes = likes;
 	}
 
 }

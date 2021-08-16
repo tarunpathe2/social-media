@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "likes")
@@ -21,17 +22,12 @@ public class Likes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column
-	private long totalLikes;
-	
 	@ManyToOne
 	@JoinColumn(name = "posts_id",nullable = false)
-	@JsonBackReference
 	private Post post;
 	
 	@OneToOne
 	@JoinColumn(name = "users_id",nullable = false)
-	@JsonBackReference
 	private User user;
 	
 	public Likes() {
@@ -41,7 +37,6 @@ public class Likes {
 	public Likes(long id, long totalLikes) {
 		super();
 		this.id = id;
-		this.totalLikes = totalLikes;
 	}
 
 	public long getId() {
@@ -50,14 +45,6 @@ public class Likes {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public long getTotalLikes() {
-		return totalLikes;
-	}
-
-	public void setTotalLikes(long totalLikes) {
-		this.totalLikes = totalLikes;
 	}
 
 	public Post getPost() {

@@ -42,21 +42,19 @@ public class Post {
 	@Column
 	private Date updatedDate;
 	
+	private long totalLikes;
+	
 	@ManyToOne
 	@JoinColumn(name = "users_id", nullable = false)
-	@JsonBackReference
 	private User user;
 	
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
-	@JsonManagedReference
 	private List<Comments> comments = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "post")
-	@JsonManagedReference
 	private List<Tags> tags = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
-	@JsonManagedReference
 	private List<Likes> likes= new ArrayList<>();
 
 	public Post() {
@@ -145,5 +143,19 @@ public class Post {
 	public void setTags(List<Tags> tags) {
 		this.tags = tags;
 	}
+
+	public long getTotalLikes() {
+		return totalLikes;
+	}
+
+	public void setTotalLikes(long totalLikes) {
+		this.totalLikes = totalLikes;
+	}
+
+	public void setLikes(List<Likes> likes) {
+		this.likes = likes;
+	}
+	
+	
 	
 }

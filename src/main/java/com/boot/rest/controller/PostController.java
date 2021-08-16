@@ -53,9 +53,9 @@ public class PostController {
 		return new Response<List<PostDto>>(HttpStatus.OK.value(), postService.getAllPosts());
 	}
 
-	@DeleteMapping("user/post/{id}")
-	public Response<PostDto> deletePost(@PathVariable Long id) {
-		return new Response<PostDto>(HttpStatus.OK.value(), postService.deleteUserPost(id));
-	}
+//	@DeleteMapping("user/post/{id}")
+//	public Response<PostDto> deletePost(@PathVariable Long id) {
+//		return new Response<PostDto>(HttpStatus.OK.value(), postService.deleteUserPost(id));
+//	}
 
 }
