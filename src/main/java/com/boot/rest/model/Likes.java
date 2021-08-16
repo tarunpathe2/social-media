@@ -26,7 +26,7 @@ public class Likes {
 	@JoinColumn(name = "posts_id",nullable = false)
 	private Post post;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "users_id",nullable = false)
 	private User user;
 	

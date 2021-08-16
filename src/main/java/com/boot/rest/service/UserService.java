@@ -9,6 +9,6 @@ public interface UserService {
 	public String addUser(UserDto userDto);
 	public List<UserDto> getAllUsers();
 	public UserDto getUser(String email);
-	public UserDto deleteUser(UserDto userDto);
+	public void deleteUser(long id);
 
 }

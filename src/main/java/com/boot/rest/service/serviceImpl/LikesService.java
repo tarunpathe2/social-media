@@ -7,7 +7,7 @@ import com.boot.rest.model.Likes;
 import com.boot.rest.repository.LikeRepository;
 import com.boot.rest.repository.PostRepository;
 
-public class LikesService {
+//public class LikesService {
 
 //	@Autowired
 //	private ModelMapper modelMapper;
@@ -20,4 +20,4 @@ public class LikesService {
 //	
 //	public Likes postLike();
 //	
-}
+//}

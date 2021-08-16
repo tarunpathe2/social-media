@@ -20,7 +20,7 @@ import com.boot.rest.exception.response.*;
 @RestController
 public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(Exception.class)
+	@ExceptionHandler(DataNotFoundException.class)
 	public final ResponseEntity<Object> handleUserNotFoundException(DataNotFoundException ex, WebRequest request)
 			throws Exception {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
@@ -29,32 +29,32 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler(Exception.class)
-	public final ResponseEntity<Object> handleBadInputException(BadInputException ex, WebRequest request)
-			throws Exception {
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-				request.getDescription(false));
-
-		return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
-	}
-	
-	@ExceptionHandler(Exception.class)
-	public final ResponseEntity<Object> handleInternalServerError(InternalServerError ex, WebRequest request)
-			throws Exception {
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-				request.getDescription(false));
-
-		return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-	
-	@ExceptionHandler(Exception.class)
-	public final ResponseEntity<Object> handleUnprocessableEntity(UnprocessableEntity ex, WebRequest request)
-			throws Exception {
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-				request.getDescription(false));
-
-		return new ResponseEntity(exceptionResponse, HttpStatus.UNPROCESSABLE_ENTITY);
-	}
-
+//	@ExceptionHandler(BadInputException.class)
+//	public final ResponseEntity<Object> handleBadInputException(BadInputException ex, WebRequest request)
+//			throws Exception {
+//		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+//				request.getDescription(false));
+//
+//		return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+//	}
+//	
+//	@ExceptionHandler(InternalServerError.class)
+//	public final ResponseEntity<Object> handleInternalServerError(InternalServerError ex, WebRequest request)
+//			throws Exception {
+//		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+//				request.getDescription(false));
+//
+//		return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
+//	
+//	@ExceptionHandler(UnprocessableEntity.class)
+//	public final ResponseEntity<Object> handleUnprocessableEntity(UnprocessableEntity ex, WebRequest request)
+//			throws Exception {
+//		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+//				request.getDescription(false));
+//
+//		return new ResponseEntity(exceptionResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+//	}
+//
 
 }

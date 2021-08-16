@@ -24,6 +24,8 @@ public class PostDto {
 	
 	private Date updatedDate;
 	
+	private long totalLikes;
+	
 	private Long userId;
 	
 	private List<Comments> comments = new ArrayList<>();
@@ -38,6 +40,14 @@ public class PostDto {
 
 	public void setId(long id) {
 		Id = id;
+	}
+
+	public long getTotalLikes() {
+		return totalLikes;
+	}
+
+	public void setTotalLikes(long totalLikes) {
+		this.totalLikes = totalLikes;
 	}
 
 	public String getPostName() {

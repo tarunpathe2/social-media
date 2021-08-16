@@ -9,8 +9,6 @@ public class LikesDto {
 
 	private long id;
 	
-	private long totalLikes;
-	
 	@NonNull
 	private Long userId;
 	
@@ -23,14 +21,6 @@ public class LikesDto {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public long getTotalLikes() {
-		return totalLikes;
-	}
-
-	public void setTotalLikes(long totalLikes) {
-		this.totalLikes = totalLikes;
 	}
 
 	public Long getUserId() {

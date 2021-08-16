@@ -17,10 +17,6 @@ public class UserDto {
 	private UserProfile userProfile;
 	
 	private List<Post> post = new ArrayList<>();
-	
-	private List<Comments> comments = new ArrayList<>();
-	
-	private Likes likes;
 
 	public long getId() {
 		return id;
@@ -52,22 +48,6 @@ public class UserDto {
 
 	public void setPost(List<Post> post) {
 		this.post = post;
-	}
-
-	public List<Comments> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comments> comments) {
-		this.comments = comments;
-	}
-
-	public Likes getLikes() {
-		return likes;
-	}
-
-	public void setLikes(Likes likes) {
-		this.likes = likes;
 	}
 	
 }

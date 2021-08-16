@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public String addUser(UserDto userDto) {
-		if (repo.FindByEmail(userDto.getEmail()).isPresent())
+		if (repo.findByEmail(userDto.getEmail()).isPresent())
 			throw new UnprocessableEntity("Email already Exist");
 		User user = modelMapper.map(userDto, User.class);
 		repo.save(user);
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto getUser(String email) {
-		Optional<User> user = repo.FindByEmail(email);
+		Optional<User> user = repo.findByEmail(email);
 		UserDto userDto = null;
 		if (!user.isPresent())
 			throw new DataNotFoundException("Data Not found");
@@ -61,10 +61,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto deleteUser(UserDto userDto) {
-		isExist(userDto.getEmail());
-		repo.delete(repo.FindByEmail(userDto.getEmail()).get());
-		return userDto;
+	public void deleteUser(long id) {
+		
+		repo.deleteById(id);
+	
 			
 	}
 }

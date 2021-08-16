@@ -73,12 +73,10 @@ public class Post {
 	}
 	
 
+
+
 	public List<Likes> getLikes() {
 		return likes;
-	}
-
-	public void setLikes(Likes likes) {
-		this.likes = (List<Likes>) likes;
 	}
 
 	public User getUser() {

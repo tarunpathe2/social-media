@@ -25,6 +25,7 @@ import com.boot.rest.model.Post;
 import com.boot.rest.model.User;
 import com.boot.rest.repository.PostRepository;
 import com.boot.rest.repository.UserRepository;
+import com.boot.rest.service.UserService;
 import com.boot.rest.service.serviceImpl.UserServiceImpl;
 import com.boot.rest.util.Response;
 
@@ -34,15 +35,16 @@ import com.boot.rest.util.Response;
 public class UserController {
 
 	@Autowired
-	private UserServiceImpl service;
+	private UserService service;
 	
 	@PostMapping("addUser")
 	public Response<String> addUser(@RequestBody UserDto userDto) {
-		return new Response<String>(HttpStatus.OK.value(),"User Added Succeessfully");
+		return new Response<String>(HttpStatus.OK.value(),service.addUser(userDto));
 	}
 	
 	@GetMapping("getAllUsers")
 	public Response<List<UserDto>> getAllUsers() {
+		System.out.println("Get User Request ");
 		return new Response<List<UserDto>>(HttpStatus.OK.value(),service.getAllUsers());
 	}
 	
@@ -51,8 +53,9 @@ public class UserController {
 		return new Response<UserDto>(HttpStatus.OK.value(),service.getUser(email));
 	}
 	
-	@DeleteMapping("deleteUser/{email}")
-	public Response<UserDto> deleteUser(@PathVariable UserDto userDto) {
-		return new Response<UserDto>(HttpStatus.OK.value(),service.deleteUser(userDto));
+	@DeleteMapping("deleteUser/{id}")
+	public ResponseEntity deleteUser(@PathVariable long id) {
+		service.deleteUser(id);
+		return new ResponseEntity(HttpStatus.OK);
 	} 
 }

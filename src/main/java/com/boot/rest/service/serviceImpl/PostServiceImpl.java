@@ -86,13 +86,14 @@ public class PostServiceImpl implements PostService{
 	
 	@Override
 	public List<PostDto> getUserPosts(UserDto userDto) {
-		if (userRepository.existsByEmail(userDto.getEmail()))
-			throw new DataNotFoundException("User Not Found");
-		List<Post> post = postRepo.findByUser(userRepository.FindByEmail(userDto.getEmail()).get());
-		List<PostDto> postDto = post.stream().map(user -> modelMapper.map(user, PostDto.class))
-				.collect(Collectors.toList());
-
-		return postDto;
+//		if (userRepository.existsByEmail(userDto.getEmail()))
+//			throw new DataNotFoundException("User Not Found");
+//		List<Post> post = postRepo.findById(userRepository.findByEmail(userDto.getEmail()).get());
+//		List<PostDto> postDto = post.stream().map(user -> modelMapper.map(user, PostDto.class))
+//				.collect(Collectors.toList());
+//
+//		return postDto;
+		return null;
 	}
 
 	@Override

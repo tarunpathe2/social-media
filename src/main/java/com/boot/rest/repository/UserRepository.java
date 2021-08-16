@@ -10,8 +10,7 @@ import com.boot.rest.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
-	public Optional<User> FindByEmail(String email);
+	
+	public Optional<User> findByEmail(String email);
 	public boolean existsByEmail(String email);
-	public UserDto deleteByEmail(String email);
 }
