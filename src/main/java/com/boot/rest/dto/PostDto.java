@@ -24,7 +24,7 @@ public class PostDto {
 	
 	private Date updatedDate;
 	
-	private long totalLikes;
+	private int totalLikes;
 	
 	private Long userId;
 	
@@ -46,7 +46,7 @@ public class PostDto {
 		return totalLikes;
 	}
 
-	public void setTotalLikes(long totalLikes) {
+	public void setTotalLikes(int totalLikes) {
 		this.totalLikes = totalLikes;
 	}
 

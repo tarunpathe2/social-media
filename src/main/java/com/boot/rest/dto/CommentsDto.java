@@ -2,9 +2,6 @@ package com.boot.rest.dto;
 
 import org.springframework.lang.NonNull;
 
-import com.boot.rest.model.Post;
-import com.boot.rest.model.User;
-
 public class CommentsDto {
 
 	private long id;

@@ -11,5 +11,5 @@ import com.boot.rest.model.User;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-//	public List<Post> findByUser(User user);
+
 }

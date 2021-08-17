@@ -5,5 +5,5 @@ import com.boot.rest.model.Comments;
 
 public interface CommentService {
 
-	public Comments addComments(CommentsDto commentsDto);
+	public String addComments(CommentsDto commentsDto);
 }

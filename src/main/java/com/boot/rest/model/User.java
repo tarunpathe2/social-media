@@ -40,7 +40,7 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade =  CascadeType.ALL)
 	@JsonIgnore
-	private List<Post> post = new ArrayList<>();
+	private List<Post> post;
 	
 	public User() {
 		super();

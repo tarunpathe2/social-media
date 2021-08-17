@@ -14,49 +14,45 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.lang.NonNull;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "posts")
 public class Post {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Column
 	private String postName;
-	
+
 	@Column
 	private String details;
-	
+
 	@Column
 	private Date createdDate;
-	
+
 	@Column
 	private Date updatedDate;
-	
+
 	@Column
-	private long totalLikes;
-	
+	private int totalLikes;
+
 	@ManyToOne
 	@JoinColumn(name = "users_id", nullable = false)
 	private User user;
-	
+
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
 	private List<Comments> comments = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	private List<Tags> tags = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "post",fetch = FetchType.LAZY)
-	private List<Likes> likes= new ArrayList<>();
+
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+	private List<Likes> likes = new ArrayList<>();
 
 	public Post() {
 		super();
@@ -69,11 +65,8 @@ public class Post {
 		this.details = details;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
-		
+
 	}
-	
-
-
 
 	public List<Likes> getLikes() {
 		return likes;
@@ -147,14 +140,12 @@ public class Post {
 		return totalLikes;
 	}
 
-	public void setTotalLikes(long totalLikes) {
+	public void setTotalLikes(int totalLikes) {
 		this.totalLikes = totalLikes;
 	}
 
 	public void setLikes(List<Likes> likes) {
 		this.likes = likes;
 	}
-	
-	
-	
+
 }

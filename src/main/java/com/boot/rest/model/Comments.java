@@ -22,10 +22,12 @@ public class Comments {
 
 	private String message;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "users_id", nullable = false)
 	private User user;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "posts_id", nullable = false)
 	private Post post;

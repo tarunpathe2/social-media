@@ -30,18 +30,18 @@ public class PostServiceImpl implements PostService{
 	UserRepository userRepository;
 
 	@Autowired
-	PostRepository postRepo;
+	PostRepository postRepository;
 
 	@Autowired
 	private UserServiceImpl userService;
 
-	private void postExist(Long id) {
-		if (!postRepo.existsById(id)) {
+	private void postExist(long id) {
+		if (!postRepository.existsById(id)) {
 			throw new DataNotFoundException("Post Not Found");
 		}
 	}
 
-	private void userExist(Long id) {
+	private void userExist(long id) {
 		if (!userRepository.existsById(id)) {
 			throw new DataNotFoundException("User Not Found");
 		}
@@ -51,9 +51,9 @@ public class PostServiceImpl implements PostService{
 
 	public PostDto addPost(PostDto postDto) {
 
-		userExist(postDto.getId());
+		userExist(postDto.getUserId());
 		Post post = modelMapper.map(postDto, Post.class);
-		post.setUser(userRepository.findById(postDto.getId()).get());
+		post.setUser(userRepository.findById(postDto.getUserId()).get());
 		post.setCreatedDate(date);
 		post.setUpdatedDate(date);
 		List<Tags> tags = new ArrayList<>();
@@ -64,14 +64,14 @@ public class PostServiceImpl implements PostService{
 			tags.add(tag);
 		});
 		post.setTags(tags);
-		postRepo.save(post);
+		postRepository.save(post);
 		return modelMapper.map(post, PostDto.class);
 
 	}
 
 	@Override
 	public List<PostDto> getAllPosts() {
-		List<Post> post = postRepo.findAll();
+		List<Post> post = postRepository.findAll();
 		List<PostDto> postDto = post.stream().map(user -> modelMapper.map(user, PostDto.class))
 				.collect(Collectors.toList());
 
@@ -81,14 +81,14 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public PostDto getPost(long id) {
 		postExist(id);
-		return modelMapper.map(postRepo.findById(id).get(), PostDto.class);
+		return modelMapper.map(postRepository.findById(id).get(), PostDto.class);
 	}
 	
 	@Override
 	public List<PostDto> getUserPosts(UserDto userDto) {
 //		if (userRepository.existsByEmail(userDto.getEmail()))
 //			throw new DataNotFoundException("User Not Found");
-//		List<Post> post = postRepo.findById(userRepository.findByEmail(userDto.getEmail()).get());
+//		List<Post> post = postRepository.findById(userRepository.findByEmail(userDto.getEmail()).get());
 //		List<PostDto> postDto = post.stream().map(user -> modelMapper.map(user, PostDto.class))
 //				.collect(Collectors.toList());
 //
@@ -99,7 +99,7 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public PostDto updateUserPost(PostDto postDto) {
 		postExist(postDto.getId());
-		Optional<Post> optionalPost = postRepo.findById(postDto.getId());
+		Optional<Post> optionalPost = postRepository.findById(postDto.getId());
 		Post post = optionalPost.get();
 		post.setUpdatedDate(date);
 		post.setPostName(postDto.getPostName());
@@ -112,15 +112,14 @@ public class PostServiceImpl implements PostService{
 			tags.add(tag);
 		});
 		post.setTags(tags);
-		postRepo.save(post);
+		postRepository.save(post);
 		return modelMapper.map(post, PostDto.class);
 
 	}
 
 	@Override
-	public void deleteUserPost(Long id) {
-		postExist(id);
-		postRepo.deleteById(id);
+	public void deleteUserPost(long id) {
+		postRepository.deleteById(id);
 	}
 
 }
