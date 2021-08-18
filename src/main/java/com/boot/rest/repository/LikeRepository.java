@@ -8,4 +8,5 @@ import com.boot.rest.model.Likes;
 @Repository
 public interface LikeRepository extends JpaRepository<Likes, Long>{
 
+	public Long countByPostId(Long id);
 }

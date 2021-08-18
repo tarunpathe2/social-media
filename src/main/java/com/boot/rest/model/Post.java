@@ -16,7 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "posts")
@@ -39,8 +40,9 @@ public class Post {
 	private Date updatedDate;
 
 	@Column
-	private int totalLikes;
+	private long totalLikes;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "users_id", nullable = false)
 	private User user;
@@ -140,7 +142,7 @@ public class Post {
 		return totalLikes;
 	}
 
-	public void setTotalLikes(int totalLikes) {
+	public void setTotalLikes(long totalLikes) {
 		this.totalLikes = totalLikes;
 	}
 

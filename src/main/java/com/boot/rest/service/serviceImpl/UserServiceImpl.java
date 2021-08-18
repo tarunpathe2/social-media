@@ -59,6 +59,17 @@ public class UserServiceImpl implements UserService {
 		userDto = modelMapper.map(user.get(), UserDto.class);
 		return userDto;
 	}
+	
+	@Override
+	public UserDto getUserById(Long id) {
+		Optional<User> userOptional = repo.findById(id);
+		UserDto userDto = null;
+		if (userOptional.isPresent()) {
+			
+			userDto = modelMapper.map(userOptional.get(), UserDto.class);
+		}
+		return userDto;
+	}
 
 	@Override
 	public void deleteUser(long id) {

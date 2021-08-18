@@ -1,18 +1,14 @@
 package com.boot.rest.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "likes")
@@ -22,10 +18,12 @@ public class Likes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "posts_id",nullable = false)
 	private Post post;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "users_id",nullable = false)
 	private User user;

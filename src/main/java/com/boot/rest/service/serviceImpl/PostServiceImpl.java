@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boot.rest.dto.PostDto;
-import com.boot.rest.dto.UserDto;
 import com.boot.rest.exception.DataNotFoundException;
 import com.boot.rest.model.Post;
 import com.boot.rest.model.Tags;
@@ -31,9 +30,6 @@ public class PostServiceImpl implements PostService{
 
 	@Autowired
 	PostRepository postRepository;
-
-	@Autowired
-	private UserServiceImpl userService;
 
 	private void postExist(long id) {
 		if (!postRepository.existsById(id)) {
@@ -82,18 +78,6 @@ public class PostServiceImpl implements PostService{
 	public PostDto getPost(long id) {
 		postExist(id);
 		return modelMapper.map(postRepository.findById(id).get(), PostDto.class);
-	}
-	
-	@Override
-	public List<PostDto> getUserPosts(UserDto userDto) {
-//		if (userRepository.existsByEmail(userDto.getEmail()))
-//			throw new DataNotFoundException("User Not Found");
-//		List<Post> post = postRepository.findById(userRepository.findByEmail(userDto.getEmail()).get());
-//		List<PostDto> postDto = post.stream().map(user -> modelMapper.map(user, PostDto.class))
-//				.collect(Collectors.toList());
-//
-//		return postDto;
-		return null;
 	}
 
 	@Override
