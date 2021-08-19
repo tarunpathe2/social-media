@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 		userDto = modelMapper.map(user.get(), UserDto.class);
 		return userDto;
 	}
-	
+
 	@Override
 	public UserDto getUserById(Long id) {
 		Optional<User> userOptional = repo.findById(id);

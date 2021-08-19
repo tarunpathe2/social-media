@@ -41,9 +41,11 @@ public class LikesServiceImpl implements LikesService{
 		}
 	}
 	
+		
 	@Override
 	public String postLike(LikesDto likesDto)
 	{
+		
 		ifUserExist(likesDto.getUserId());
 		ifPostExist(likesDto.getPostId());
 		Likes likes = modelMapper.map(likesDto, Likes.class);

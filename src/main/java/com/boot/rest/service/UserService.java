@@ -10,6 +10,6 @@ public interface UserService {
 	public List<UserDto> getAllUsers();
 	public UserDto getUser(String email);
 	public void deleteUser(long id);
-	public UserDto getUserById(Long userId);
+	public UserDto getUserById(Long id);
 
 }

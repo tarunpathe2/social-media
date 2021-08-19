@@ -53,9 +53,6 @@ public class Post {
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	private List<Tags> tags = new ArrayList<>();
 
-	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
-	private List<Likes> likes = new ArrayList<>();
-
 	public Post() {
 		super();
 	}
@@ -69,11 +66,7 @@ public class Post {
 		this.updatedDate = updatedDate;
 
 	}
-
-	public List<Likes> getLikes() {
-		return likes;
-	}
-
+	
 	public User getUser() {
 		return user;
 	}
@@ -146,8 +139,12 @@ public class Post {
 		this.totalLikes = totalLikes;
 	}
 
-	public void setLikes(List<Likes> likes) {
-		this.likes = likes;
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", postName=" + postName + ", details=" + details + ", createdDate=" + createdDate
+				+ ", updatedDate=" + updatedDate + ", totalLikes=" + totalLikes + ", user=" + user + ", comments="
+				+ comments + ", tags=" + tags + "]";
 	}
 
+	
 }

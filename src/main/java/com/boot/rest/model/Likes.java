@@ -1,66 +1,57 @@
 package com.boot.rest.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "likes")
-public class Likes {
+@IdClass(Likes.class)
+public class Likes implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "posts_id",nullable = false)
-	private Post post;
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "users_id",nullable = false)
-	private User user;
-	
+	@Column
+	private Long postId;
+
+	@Id
+	@Column
+	private Long userId;
+
 	public Likes() {
 		super();
 	}
 
-	public Likes(long id, Post post, User user) {
+	public Long getPostId() {
+		return postId;
+	}
+
+	public void setPostId(Long postId) {
+		this.postId = postId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Likes(Long postId, Long userId) {
 		super();
-		this.id = id;
-		this.post = post;
-		this.user = user;
+		this.postId = postId;
+		this.userId = userId;
 	}
 
-	public long getId() {
-		return id;
+	@Override
+	public String toString() {
+		return "Likes [postId=" + postId + ", userId=" + userId + "]";
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Post getPost() {
-		return post;
-	}
-
-	public void setPost(Post post) {
-		this.post = post;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
 }

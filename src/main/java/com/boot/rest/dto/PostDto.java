@@ -31,8 +31,6 @@ public class PostDto {
 	private List<Comments> comments = new ArrayList<>();
 	
 	private List<Tags> tags = new ArrayList<>();
-	
-	private List<Likes> likes= new ArrayList();;
 
 	public long getId() {
 		return Id;
@@ -105,14 +103,5 @@ public class PostDto {
 	public void setTags(List<Tags> tags) {
 		this.tags = tags;
 	}
-
-	public List<Likes> getLikes() {
-		return likes;
-	}
-
-	public void setLikes(List<Likes> likes) {
-		this.likes = likes;
-	}
-	
 	
 }
