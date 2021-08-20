@@ -31,13 +31,13 @@ public class LikesServiceImpl implements LikesService{
 	
 	private void ifUserExist(Long id) {
 		if (!userRepo.existsById(userRepo.findById(id).get().getId())) {
-			throw new DataNotFoundException("");
+			throw new DataNotFoundException("User not exist");
 		}
 	}
 
 	private void ifPostExist(Long id) {
 		if (!postRepo.existsById(id)) {
-			throw new DataNotFoundException("");
+			throw new DataNotFoundException("Post Not Exist");
 		}
 	}
 	
