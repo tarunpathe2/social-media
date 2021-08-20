@@ -37,3 +37,6 @@ Likes : User is able to like post only one time. If user trying to same post twi
 
 URL for Like 
 add like :http://localhost:8080/social-media/post/like
+
+![ER-Diagram](https://user-images.githubusercontent.com/88184567/130204654-56b9d8c3-374b-45d7-992e-6ee9e4cfcaaa.jpg)
+
